@@ -1,15 +1,21 @@
 <template>
   <div class="login-container">
     <div class="decor"></div>
-    <div class="main">
-      <form @submit.prevent="login">
-        <input v-model="username" id="username" :disabled="loading" type="text" placeholder="Username" @input="checkUsername">
-        <input v-model="password" id="password" :disabled="loading" type="password" placeholder="Password" @input="checkPassword">
-        <input type="submit" value="Login">
-      </form>
+    <form @submit.prevent="login" class="main">
+      <h1>Apotek XYZ</h1>
+      <img src="~/assets/img/logo_apotek.png" alt="Logo Apotek">
+      <div class="input">
+        <input v-model="username" id="username" :disabled="loading" type="text" placeholder=" " @input="checkUsername" required>
+        <label>Username: </label>
+      </div>
+      <div class="input">
+        <input v-model="password" id="password" :disabled="loading" type="password" placeholder=" " @input="checkPassword" required>
+        <label>Password: </label>
+      </div>
+      <input type="submit" value="Login">
       <div v-if="errorMessage">Username atau password salah</div>
       <div v-if="loading">Logging in...</div>
-    </div>
+    </form>
     <div class="decor"></div>
   </div>
 </template>
@@ -21,6 +27,10 @@ const { data: users } = useAsyncData('users', async () => {
   const { data } = await supabase.from('users').select()
   return data
 })
+
+setTimeout(() => {
+  console.log(users.value)
+}, 3000)
 
 const errorMessage = ref(false)
 const loading = ref(false)
@@ -78,6 +88,32 @@ onMounted(() => {
 })
 </script>
 
-<style>
-
+<style scoped>
+@import url('~/assets/css/main.css');
+.login-container {
+  width: 1340px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  font-family: sans-serif;
+  font-size: 80px;
+  font-weight: lighter;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+}
+.main .input {
+  width: 100%;
+}
+.decor {
+  width: 240px;
+  height: 100%;
+  background-color: #090;
+}
 </style>

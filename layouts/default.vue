@@ -10,6 +10,8 @@
 
 <style>
 .wrapper {
-  max-width: 1340px;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
 }
 </style>

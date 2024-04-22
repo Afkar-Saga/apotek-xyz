@@ -9,6 +9,15 @@ h3 {
   -webkit-text-stroke: 1px #1e1e1e;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+/* FORM INPUT */
 .input-group {
   display: flex;
   flex-wrap: wrap;
@@ -17,24 +26,41 @@ h3 {
 .input {
   position: relative;
 }
-.input > .input-label {
-  position: absolute;
-  top: 0.9rem;
-  left: 0.85rem;
-  line-height: 145%;
-  transition: top 0.2s;
+.input input,
+.input select,
+.input textarea {
+  width: 100%;
+  height: 50px;
+  padding: 8px 20px;
+  background-color: #fafafa;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  box-shadow: 0 6px 2px rgba(0, 0, 0, 0.25);
+  outline: none;
+  transition: .3s;
 }
-.input > input:hover {
+.input label {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  color: #777;
+  pointer-events: none;
+  transition: .5s;
+}
+.input input:focus ~ label, .input textarea:focus ~ label,
+.input input:valid ~ label, .input textarea:valid ~ label {
+  top: -6px;
+  left: 15px;
+  color: #070;
+  font-size: 1em;
+  font-weight: bold;
+}
+.input input:hover {
   background-color: rgba(73, 224, 133, 0.12);
   border-color: #121212;
 }
-.input > input:focus + .input-label,
-.input > input:valid + .input-label {
-  top: 0;
-  font-size: 0.9rem;
-  color: #090;
-}
-select, textarea, input:not(.submit) {
+/* select, textarea, input:not(.submit) {
   width: 480px;
   height: 50px;
   padding: 8px 20px;
@@ -55,14 +81,9 @@ select.selected {
 }
 textarea {
   padding-top: 17px;
-}
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-.container .submit {
+} */
+
+.submit {
   width: 285px;
   height: 50px;
   background-color: #090;
@@ -73,6 +94,6 @@ textarea {
   cursor: pointer;
   transition: 0.3s;
 }
-.container .submit:hover {
+.submit:hover {
   background-color: #070;
 }
