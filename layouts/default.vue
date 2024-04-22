@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <slot />
   </div>
 </template>
@@ -9,5 +9,7 @@
 </script>
 
 <style>
-
+.wrapper {
+  max-width: 1340px;
+}
 </style>

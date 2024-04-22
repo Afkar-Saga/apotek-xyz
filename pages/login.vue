@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <form @submit.prevent="login">
-      <input v-model="username" id="username" :disabled="loading" type="text" placeholder="Username" @input="checkUsername">
-      <input v-model="password" id="password" :disabled="loading" type="password" placeholder="Password" @input="checkPassword">
-      <input type="submit" value="Login">
-    </form>
-    <div v-if="errorMessage">Username atau password salah</div>
-    <div v-if="loading">Logging in...</div>
+  <div class="login-container">
+    <div class="decor"></div>
+    <div class="main">
+      <form @submit.prevent="login">
+        <input v-model="username" id="username" :disabled="loading" type="text" placeholder="Username" @input="checkUsername">
+        <input v-model="password" id="password" :disabled="loading" type="password" placeholder="Password" @input="checkPassword">
+        <input type="submit" value="Login">
+      </form>
+      <div v-if="errorMessage">Username atau password salah</div>
+      <div v-if="loading">Logging in...</div>
+    </div>
+    <div class="decor"></div>
   </div>
 </template>
 
