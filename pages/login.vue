@@ -28,10 +28,6 @@ const { data: users } = useAsyncData('users', async () => {
   return data
 })
 
-setTimeout(() => {
-  console.log(users.value)
-}, 3000)
-
 const errorMessage = ref(false)
 const loading = ref(false)
 const username = ref('')
@@ -64,7 +60,7 @@ async function login() {
         password: password.value
       })
       if (error) {
-        errorMessage = true
+        errorMessage.value = true
         console.error(error)
       }
       else {
@@ -97,7 +93,6 @@ onMounted(() => {
   align-items: center;
 }
 h1 {
-  font-family: sans-serif;
   font-size: 80px;
   font-weight: lighter;
 }

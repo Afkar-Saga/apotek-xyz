@@ -1,6 +1,14 @@
-* {
-  font-family: sans-serif;
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('/fonts/SourceSans3-VariableFont_wght.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
+
+* {
+  font-family: 'Source Sans 3', sans-serif;
+}
+
 h3 {
   margin: 10px;
   font-size: 40px;
@@ -11,9 +19,9 @@ h3 {
 }
 
 .container {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 10px;
 }
 
@@ -96,4 +104,43 @@ textarea {
 }
 .submit:hover {
   background-color: #070;
+}
+
+/* TABLE */
+.table {
+  width: 100%;
+  overflow: auto;
+}
+.table::-webkit-scrollbar {
+  display: none;
+}
+table {
+  width: 100%;
+  background-color: #f4f4f4;
+  border: 1px solid #777;
+  border-radius: 0 0 12px 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+th, td {
+  padding: 10.5px 24px;
+  text-align: left;
+}
+tr:not(:last-of-type), thead tr {
+  & th, td {
+    border-bottom: 1px solid #777;
+  }
+}
+th:first-child {
+  width: 56px;
+}
+table caption {
+  padding: 23px;
+  background-color: #f4f4f4;
+  border: 1px solid #777;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+thead {
+  background-color: #e0e0e0;
 }

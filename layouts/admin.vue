@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="wrapper">
     <Navbar>
-      <h3>{{ username.username }}</h3>
+      <img src="~/assets/img/logo_admin.png" alt="Admin">
+      <div class="username">{{ username.username }}</div>
       <NuxtLink to="/log" :class="{ active: route.name == 'log' }">Log Activity</NuxtLink>
       <NuxtLink to="/users" :class="{ active: route.name == 'users' }">Kelola User</NuxtLink>
       <NuxtLink to="/obat" :class="{ active: route.name == 'obat' }">Kelola Obat</NuxtLink>
@@ -24,7 +25,16 @@ if (error) throw error
 </script>
 
 <style scoped>
+@import url('~/assets/css/main.css');
+.wrapper {
+  background-image: url('~/assets/img/bg-admin.png');
+  background-size: cover;
+}
+.username {
+  font-size: 24px;
+}
 .main {
+  width: 100%;
   margin-left: 260px;
   padding: 75px 69px;
   display: flex;
@@ -36,7 +46,6 @@ a {
   width: 100%;
   height: 50px;
   color: black;
-  font-family: sans-serif;
   font-size: 16px;
   text-align: center;
   line-height: 50px;
