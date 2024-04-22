@@ -1,0 +1,78 @@
+* {
+  font-family: sans-serif;
+}
+h3 {
+  margin: 10px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  -webkit-text-stroke: 1px #1e1e1e;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+}
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.input {
+  position: relative;
+}
+.input > .input-label {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.85rem;
+  line-height: 145%;
+  transition: top 0.2s;
+}
+.input > input:hover {
+  background-color: rgba(73, 224, 133, 0.12);
+  border-color: #121212;
+}
+.input > input:focus + .input-label,
+.input > input:valid + .input-label {
+  top: 0;
+  font-size: 0.9rem;
+  color: #090;
+}
+select, textarea, input:not(.submit) {
+  width: 480px;
+  height: 50px;
+  padding: 8px 20px;
+  background-color: #fafafa;
+  border: 2px inset black;
+  border-radius: 15px;
+  font-size: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+select, textarea::placeholder, input::placeholder {
+  color: #777;
+}
+select option:not(:first-of-type) {
+  color: black;
+}
+select.selected {
+  color: black;
+}
+textarea {
+  padding-top: 17px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.container .submit {
+  width: 285px;
+  height: 50px;
+  background-color: #090;
+  color: white;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.container .submit:hover {
+  background-color: #070;
+}
