@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3>Kelola Obat</h3>
-    <form>
+    <!-- <form>
       <div class="input-group">
-        <!-- <input type="text" v-model="kodeObat" placeholder="Kode Obat"> -->
+        <input type="text" v-model="kodeObat" placeholder="Kode Obat">
         <label class="input">
           <input type="text" placeholder=" ">
           <span class="input-label">Kode Obat</span>
@@ -43,13 +43,14 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup>
 definePageMeta({
-  middleware: 'apply-layout'
+  layout: 'main',
+  middleware: 'auth'
 })
 
 const supabase = useSupabaseClient()

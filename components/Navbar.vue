@@ -14,13 +14,30 @@
 <script setup>
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+
+async function signOut() {
+  try {
+    const { error } = await supabase.from('log').insert({
+      aktivitas: 'Logout',
+      id_user: user.value.id
+    })
+    if (error) throw error
+    else {
+      const { error } = await supabase.auth.signOut()
+      if (error) throw error
+    }
+  } catch (error) {
+    console.error(error.message)
+  } finally {
+    navigateTo('/login')
+  }
+}
 </script>
 
 <style scoped>
 .sidenav {
   height: 100%;
-  width: 260px;
-  position: fixed;
+  min-width: 260px;
   z-index: 1;
   top: 0;
   left: 0;

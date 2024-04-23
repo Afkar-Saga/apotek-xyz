@@ -4,6 +4,10 @@
     <form @submit.prevent="login" class="main">
       <h1>Apotek XYZ</h1>
       <img src="~/assets/img/logo_apotek.png" alt="Logo Apotek">
+      <div>
+        <div v-if="errorMessage">Username atau password salah</div>
+        <div v-if="loading">Logging in...</div>
+      </div>
       <div class="input">
         <input v-model="username" id="username" :disabled="loading" type="text" placeholder=" " @input="checkUsername" required>
         <label>Username: </label>
@@ -12,9 +16,7 @@
         <input v-model="password" id="password" :disabled="loading" type="password" placeholder=" " @input="checkPassword" required>
         <label>Password: </label>
       </div>
-      <input type="submit" value="Login">
-      <div v-if="errorMessage">Username atau password salah</div>
-      <div v-if="loading">Logging in...</div>
+      <input type="submit" value="Login" class="submit">
     </form>
     <div class="decor"></div>
   </div>
