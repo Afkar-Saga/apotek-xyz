@@ -1,17 +1,28 @@
 <template>
   <div>
     <h3>Kelola Obat</h3>
-    <!-- <form>
+    <form @submit.prevent="insertObat">
       <div class="input-group">
-        <input type="text" v-model="kodeObat" placeholder="Kode Obat">
-        <label class="input">
-          <input type="text" placeholder=" ">
-          <span class="input-label">Kode Obat</span>
-        </label>
-        <input type="text" v-model="namaObat" placeholder="Nama Obat">
-        <input type="date" v-model="expiredData" placeholder="Expired Data">
-        <input type="text" v-model="jumlah" placeholder="Jumlah">
-        <input type="text" v-model="harga" placeholder="Harga">
+        <div class="input">
+          <input type="text" v-model="kodeObat" placeholder=" " required>
+          <label>Kode Obat</label>
+        </div>
+        <div class="input">
+          <input type="text" v-model="namaObat" placeholder=" " required>
+          <label>Nama Obat</label>
+        </div>
+        <div class="input">
+          <input type="date" v-model="expiredDate" placeholder=" " required>
+          <label>Expired Date</label>
+        </div>
+        <div class="input">
+          <input type="text" v-model="jumlah" placeholder=" " required>
+          <label>Jumlah</label>
+        </div>
+        <div class="input">
+          <input type="text" v-model="harga" placeholder=" " required>
+          <label>Harga</label>
+        </div>
       </div>
       <div class="container">
         <input type="submit" value="Tambah" class="submit">
@@ -32,18 +43,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(obat, index) in obats" :key="obat.id">
+          <tr v-if="pending">
+            <td colspan="7">Sedang mengambil data...</td>
+          </tr>
+          <tr v-else v-for="(obat, index) in obats" :key="obat.id">
             <td>{{ index + 1 }}</td>
             <td>{{ obat.kode_obat }}</td>
             <td>{{ obat.nama_obat }}</td>
             <td>{{ obat.expired_date }}</td>
             <td>{{ obat.jumlah }}</td>
             <td>{{ obat.harga }}</td>
-            <td>Edit, Delete</td>
+            <td>
+              <button class="btn-icon"><img src="~/assets/img/edit.png" alt="Edit"></button>
+            </td>
           </tr>
         </tbody>
       </table>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -55,10 +71,28 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 
-const { data: obats } = useAsyncData('obat', async () => {
+const kodeObat = ref('')
+const namaObat = ref('')
+const expiredDate = ref('')
+const jumlah = ref('')
+const harga = ref('')
+
+const { data: obats, pending, refresh } = useAsyncData('obat', async () => {
   const { data } = await supabase.from('obat').select()
   return data
 })
+
+async function insertObat() {
+  const { error } = await supabase.from('obat').insert({
+    kode_obat: kodeObat.value,
+    nama_obat: namaObat.value,
+    expired_date: expiredDate.value,
+    jumlah: jumlah.value,
+    harga: harga.value
+  })
+  if (error) throw error
+  else refresh()
+}
 </script>
 
 <style scoped>

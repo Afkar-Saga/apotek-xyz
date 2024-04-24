@@ -14,6 +14,6 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 </script>
 
-<style>
+<style scoped>
 
 </style>

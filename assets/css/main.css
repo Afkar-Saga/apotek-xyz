@@ -117,8 +117,8 @@ table {
   border-spacing: 0;
 }
 th, td {
-  padding: 10.5px 24px;
-  text-align: left;
+  padding: 3px 24px;
+  text-align: center;
 }
 tr:not(:last-of-type), thead tr {
   & th, td {
@@ -130,6 +130,8 @@ th:first-child {
 }
 table caption {
   padding: 23px;
+  font-weight: bold;
+  font-size: 20px;
   background-color: #f4f4f4;
   border: 1px solid #777;
   border-bottom: none;
@@ -139,14 +141,14 @@ thead {
   background-color: #e0e0e0;
 }
 .btn-icon {
-  padding: 5px;
+  padding: 3px;
   background: none;
   border: none;
   cursor: pointer;
   transition: .3s;
 }
 .btn-icon img {
-  width: 40px;
+  width: 25px;
 }
 .btn-icon:hover {
   background-color: #e0e0e0;

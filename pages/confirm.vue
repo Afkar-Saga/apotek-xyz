@@ -15,6 +15,6 @@ watch(user, () => {
 }, { immediate: true })
 </script>
 
-<style>
+<style scoped>
 
 </style>

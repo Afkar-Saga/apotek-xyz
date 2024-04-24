@@ -36,6 +36,7 @@ const background = computed(() => {
 <style scoped>
 @import url('~/assets/css/main.css');
 .wrapper {
+  display: flex;
   height: 100vh;
   background-image: v-bind(background);
   background-size: cover;
