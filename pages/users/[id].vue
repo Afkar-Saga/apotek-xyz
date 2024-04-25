@@ -31,6 +31,10 @@
           <input type="email" v-model="form.email" placeholder=" " required>
           <label>Email</label>
         </div>
+        <div class="input">
+          <input type="text" v-model="form.password" placeholder=" " required>
+          <label>Password</label>
+        </div>
       </div>
       <div class="container">
         <input type="submit" value="Edit" class="submit">
@@ -46,6 +50,7 @@ definePageMeta({
 })
 
 const route = useRoute()
+const supabase = useSupabaseClient()
 
 const form = ref({
   email: '',
@@ -61,12 +66,19 @@ async function setData() {
   const { user } = await $fetch(`/api/user/${route.params.id}`, {
     method: 'GET'
   })
-  form.value.email = user.email
-  form.value.tipeUser = user.user_metadata.tipe_user
-  form.value.namaUser = user.user_metadata.nama_user
-  form.value.alamat = user.user_metadata.alamat
-  form.value.telpon = user.user_metadata.telpon
-  form.value.username = user.user_metadata.username
+  if (user) {
+    const { data: { password }, error } = await supabase.from('users').select('password').eq('id', user.id).limit(1).single()
+    if (error) throw error
+    if (password) {
+      form.value.email = user.email
+      form.value.password = password
+      form.value.tipeUser = user.user_metadata.tipe_user
+      form.value.namaUser = user.user_metadata.nama_user
+      form.value.alamat = user.user_metadata.alamat
+      form.value.telpon = user.user_metadata.telpon
+      form.value.username = user.user_metadata.username
+    }
+  }
 }
 
 async function updateUser() {

@@ -13,7 +13,7 @@
         <label>Username: </label>
       </div>
       <div class="input">
-        <input v-model="password" id="password" :disabled="loading" type="password" placeholder=" " @input="checkPassword" required>
+        <input v-model="password" id="password" :disabled="loading" type="password" placeholder=" " required>
         <label>Password: </label>
       </div>
       <input type="submit" value="Login" class="submit">
@@ -25,8 +25,15 @@
 <script setup>
 const supabase = useSupabaseClient()
 
+// const { data: users } = useAsyncData('users', async () => {
+//   const { data } = await supabase.from('users').select()
+//   return data
+// })
+
 const { data: users } = useAsyncData('users', async () => {
-  const { data } = await supabase.from('users').select()
+  const data = await $fetch('/api/user', {
+    method: 'GET'
+  })
   return data
 })
 
@@ -37,19 +44,19 @@ const password = ref('')
 
 function checkUsername() {
   users.value.forEach(user => {
-    if (user.username == username.value) {
+    if (user.user_metadata.username == username.value) {
       document.getElementById('password').focus()
     }
   })
 }
 
-function checkPassword() {
-  users.value.forEach(user => {
-    if (user.password == password.value) {
-      login()
-    }
-  })
-}
+// function checkPassword() {
+//   users.value.forEach(user => {
+//     if (user.password == password.value) {
+//       login()
+//     }
+//   })
+// }
 
 async function login() {
   try {

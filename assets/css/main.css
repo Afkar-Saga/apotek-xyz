@@ -19,13 +19,11 @@ h3 {
 }
 
 .container {
-  width: 100%;
   display: flex;
   justify-content: center;
   padding: 10px;
 }
 
-/* FORM INPUT */
 .input-group {
   display: flex;
   justify-content: center;
@@ -100,16 +98,14 @@ select.selected {
   background-color: #070;
 }
 
-/* TABLE */
 .table {
-  width: 100%;
   overflow: auto;
 }
 .table::-webkit-scrollbar {
   display: none;
 }
 table {
-  width: 100%;
+  table-layout: fixed;
   background-color: #f4f4f4;
   border: 1px solid #777;
   border-radius: 0 0 12px 12px;
@@ -119,6 +115,7 @@ table {
 th, td {
   padding: 3px 24px;
   text-align: center;
+  white-space: nowrap;
 }
 tr:not(:last-of-type), thead tr {
   & th, td {
@@ -142,14 +139,25 @@ thead {
 }
 .btn-icon {
   padding: 3px;
-  background: none;
-  border: none;
+  width: 25px;
   cursor: pointer;
   transition: .3s;
+  button {
+    padding: 0;
+    background: none;
+    border: none;
+  }
+}
+td:has(.btn-icon) {
+  display: flex;
 }
 .btn-icon img {
-  width: 25px;
+  cursor: pointer;
+  width: 100%
 }
 .btn-icon:hover {
   background-color: #e0e0e0;
+}
+.loader {
+  margin: auto;
 }

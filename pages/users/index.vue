@@ -58,7 +58,7 @@
         </thead>
         <tbody>
           <tr v-if="pending">
-            <td colspan="9">Sedang mengambil data...</td>
+            <td colspan="9"><Loader /></td>
           </tr>
           <tr v-else v-for="(user, index) in users" :key="user.id">
             <td>{{ index + 1 }}</td>
@@ -70,8 +70,12 @@
             <td>{{ user.email }}</td>
             <td>{{ user.password }}</td>
             <td>
-              <NuxtLink class="btn-icon" :to="`/users/edit/${user.id}`"><img src="~/assets/img/edit.png" alt="Edit"></NuxtLink>
-              <button class="btn-icon" @click="deleteUser(user.id)"><img src="~/assets/img/delete.png" alt="Delete"></button>
+              <div class="btn-icon">
+                <NuxtLink :to="`/users/${user.id}`"><img src="~/assets/img/edit.png" alt="Edit"></NuxtLink>
+              </div>
+              <div class="btn-icon">
+                <button @click="deleteUser(user.id)"><img src="~/assets/img/delete.png" alt="Delete"></button>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -90,9 +94,13 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
 const { data: users, pending, refresh } = useAsyncData('users', async () => {
-  const data = await $fetch('/api/user', {
-    method: 'GET'
-  })
+  const [data, { data: passwords }] = await Promise.all([
+    $fetch('/api/user', {
+      method: 'GET'
+    }),
+    supabase.from('users').select('password')
+  ])
+  data.forEach((d, i) => d.password = passwords[i].password)
   return data
 })
 

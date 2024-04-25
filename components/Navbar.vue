@@ -37,13 +37,9 @@ async function signOut() {
 <style scoped>
 .sidenav {
   height: 100%;
-  min-width: 260px;
-  z-index: 1;
-  top: 0;
-  left: 0;
   background-color: #f4f4f4;
-  overflow-x: hidden;
   box-shadow: 2px 0 5px 5px rgba(0, 0, 0, 0.25);
+  flex: 1 0 14%;
 }
 .brand {
   display: flex;

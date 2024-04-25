@@ -13,7 +13,8 @@ export default eventHandler(async (event) => {
       alamat: body.alamat,
       telpon: body.telpon,
       username: body.username
-    }
+    },
+    email_confirm: true
   })
   if (error) throw error
   
