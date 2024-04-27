@@ -6,12 +6,12 @@
         <img src="~/assets/img/logo_apoteker.png" alt="Apoteker" v-if="tipe_user == 'Apoteker'">
         <img src="~/assets/img/logo_kasir.png" alt="Kasir" v-if="tipe_user == 'Kasir'">
         <div class="username">{{ username }}</div>
-        <NuxtLink v-if="tipe_user == 'Admin'" to="/log" :class="{ active: route.name.includes('log') }">Log Activity</NuxtLink>
-        <NuxtLink v-if="tipe_user == 'Admin'" to="/users" :class="{ active: route.name.includes('users') }">Kelola User</NuxtLink>
-        <NuxtLink v-if="['Admin', 'Apoteker'].includes(tipe_user)" to="/obat" :class="{ active: route.name.includes('obat') }">Kelola Obat</NuxtLink>
-        <NuxtLink v-if="['Admin', 'Apoteker'].includes(tipe_user)" to="/resep" :class="{ active: route.name.includes('resep') }">Kelola Resep</NuxtLink>
-        <NuxtLink v-if="['Admin', 'Kasir'].includes(tipe_user)" to="/transaksi" :class="{ active: route.name.includes('transaksi') }">Transaksi</NuxtLink>
-        <NuxtLink v-if="tipe_user == 'Admin'" to="/laporan" :class="{ active: route.name.includes('laporan') }">Laporan</NuxtLink>
+        <NuxtLink v-if="tipe_user == 'Admin'" to="/log" :class="{ active: route.name.split('-')[0].includes('log') }">Log Activity</NuxtLink>
+        <NuxtLink v-if="tipe_user == 'Admin'" to="/users" :class="{ active: route.name.split('-')[0].includes('users') }">Kelola User</NuxtLink>
+        <NuxtLink v-if="['Admin', 'Apoteker'].includes(tipe_user)" to="/obat" :class="{ active: route.name.split('-')[0].includes('obat') }">Kelola Obat</NuxtLink>
+        <NuxtLink v-if="['Admin', 'Apoteker'].includes(tipe_user)" to="/resep" :class="{ active: route.name.split('-')[0].includes('resep') }">Kelola Resep</NuxtLink>
+        <NuxtLink v-if="['Admin', 'Kasir'].includes(tipe_user)" to="/transaksi" :class="{ active: route.name.split('-')[0].includes('transaksi') }">Transaksi</NuxtLink>
+        <NuxtLink v-if="tipe_user == 'Admin'" to="/laporan" :class="{ active: route.name.split('-')[0].includes('laporan') }">Laporan</NuxtLink>
       </Navbar>
       <div class="main">
         <main class="content">

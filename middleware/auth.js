@@ -4,11 +4,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (user.value.user_metadata.tipe_user == "Admin") return
 
   if (user.value.user_metadata.tipe_user == "Apoteker") {
-    if (['index', 'obat', 'resep'].some(route => to.name.includes(route))) return
+    if (['index', 'obat', 'resep'].includes(to.name.split('-')[0])) return
     else return navigateTo("/")
   }
   if (user.value.user_metadata.tipe_user == "Kasir") {
-    if (['index', 'transaksi'].some(route => to.name.includes(route))) return
+    if (['index', 'transaksi'].includes(to.name.split('-')[0])) return
     else return navigateTo("/")
   }
 })
