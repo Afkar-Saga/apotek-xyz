@@ -1,18 +1,7 @@
 <template>
   <div>
-    <div class="title"><NuxtLink to="/users">User</NuxtLink> > Edit</div>
-    <div class="container">
-      <div class="detail">
-        <div>Tipe User: {{ form.tipeUser }}</div>
-        <div>Nama: {{ form.namaUser }}</div>
-        <div>Alamat: {{ form.alamat }}</div>
-        <div>Telpon: {{ form.telpon }}</div>
-        <div>Username: {{ form.username }}</div>
-        <div>Email: {{ form.email }}</div>
-        <div>Password: {{ form.password }}</div>
-      </div>
-    </div>
-    <form @submit.prevent="updateUser">
+    <div class="title"><NuxtLink to="/users">User</NuxtLink> > Tambah </div>
+    <form @submit.prevent="createUser">
       <div class="input-group">
         <div class="input">
           <select v-model="form.tipeUser" :class="{ selected: form.tipeUser }" required>
@@ -49,7 +38,7 @@
       </div>
       <div class="container">
         <Loader v-if="loading" />
-        <input v-else type="submit" value="Edit" class="submit edit">
+        <input v-else type="submit" value="Tambah" class="submit">
       </div>
     </form>
   </div>
@@ -61,67 +50,35 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const { id } = useRoute().params
 const supabase = useSupabaseClient()
 
 const form = ref({
-  email: '',
-  password: '',
   tipeUser: '',
   namaUser: '',
   alamat: '',
   telpon: '',
   username: '',
+  email: '',
+  password: ''
 })
 const loading = ref(false)
 
-async function setData() {
+async function createUser() {
   try {
     loading.value = true
-    const { data: user, error } = await supabase.from('users').select().eq('id', id).limit(1).single()
-    if (error) throw error
-    if (user) {
-      form.value.email = user.email
-      form.value.password = user.password
-      form.value.tipeUser = user.tipe_user
-      form.value.namaUser = user.nama_user
-      form.value.alamat = user.alamat
-      form.value.telpon = user.telpon
-      form.value.username = user.username
-    }
-  } catch (error) {
-    console.error(error.message)
-  } finally {
-    loading.value = false
-  }
-}
-
-async function updateUser() {
-  try {
-    loading.value = true
-    const data = await $fetch(`/api/user/${id}`, {
-      method: 'PUT',
+    const data = await $fetch('/api/user', {
+      method: 'POST',
       body: {
         email: form.value.email,
+        password: form.value.password,
         tipe_user: form.value.tipeUser,
         nama_user: form.value.namaUser,
         alamat: form.value.alamat,
         telpon: form.value.telpon,
         username: form.value.username,
-        password: form.value.password
       }
     })
-    const { error } = await supabase.from('users').update({
-      email: form.value.email,
-        tipe_user: form.value.tipeUser,
-        nama_user: form.value.namaUser,
-        alamat: form.value.alamat,
-        telpon: form.value.telpon,
-        username: form.value.username,
-        password: form.value.password
-    }).eq('id', id)
-    if (error) throw error
-    if (data && !error) navigateTo('/users')
+    if (data) insertUser(data.user)
   } catch (error) {
     console.error(error.message)
   } finally {
@@ -129,9 +86,23 @@ async function updateUser() {
   }
 }
 
-onMounted(() => {
-  setData()
-})
+async function insertUser(userData) {
+  const { error } = await supabase.from('users').insert({
+    id: userData.id,
+    tipe_user: form.value.tipeUser,
+    nama_user: form.value.namaUser,
+    alamat: form.value.alamat,
+    telpon: form.value.telpon,
+    username: form.value.username,
+    email: form.value.email,
+    password: form.value.password,
+  })
+  if (error) throw error
+  else {
+    alert("Berhasil menambah user baru")
+    navigateTo('/users')
+  }
+}
 </script>
 
 <style scoped>

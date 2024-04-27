@@ -37,7 +37,8 @@ async function signOut() {
 <style scoped>
 .sidenav {
   height: 100%;
-  background-color: #f4f4f4;
+  background: linear-gradient(to right bottom, #090, #007d00);
+  color: white;
   box-shadow: 2px 0 5px 5px rgba(0, 0, 0, 0.25);
   flex: 1 0 14%;
 }
@@ -65,7 +66,7 @@ async function signOut() {
 button {
   background: none;
   border: none;
-  color: #777;
+  color: #aaa;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;

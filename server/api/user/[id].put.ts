@@ -18,6 +18,5 @@ export default eventHandler(async (event) => {
     email_confirm: true
   })
   if (error) throw error
-
   return user
 })

@@ -78,7 +78,7 @@ async function login() {
           id_user: data[0].id
         })
         if (error) throw error
-        else navigateTo('/confirm')
+        else navigateTo('/')
       }
     }
   } catch (error) {

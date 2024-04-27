@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2>Selamat Datang</h2>
-    <h3>{{ user.user_metadata.nama_user }}</h3>
+    <h1>Selamat Datang</h1>
+    <h2>{{ nama_user }}</h2>
   </div>
 </template>
 
@@ -13,8 +13,9 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+const { data: { nama_user } } = await supabase.from('users').select('nama_user').eq('id', user.value.id).limit(1).single()
 </script>
 
 <style scoped>
-
+@import url('~/assets/css/main.css');
 </style>
